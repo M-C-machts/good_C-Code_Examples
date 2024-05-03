@@ -1,0 +1,14 @@
+
+
+# Directories
+bin/
+obj/
+Debug/
+Release/
+.vs/
+.vscode/
+
+# Executables
+*.exe
+*.out
+*.app
