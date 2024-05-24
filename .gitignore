@@ -12,3 +12,5 @@ Release/
 *.exe
 *.out
 *.app
+
+test.c
