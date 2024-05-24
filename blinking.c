@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <unistd.h>
 
+#include <time.h>
 
 #include "blinking.h"
 
@@ -119,12 +120,29 @@ int main()
 { 
 	fsm.state = state_start;
 
-
+/*
+	// while function with delay
 	while(1) {
 		usleep(500 * 1000);  					// usleep takes sleep time in microseconds
 		fsm.state();							//runs current state of state machine
 	}
+*/
 
+
+	// while function that just loops through often so it can react to something and is not blocked
+	time_t start;
+	start = time(NULL);
+
+
+	while(1) {
+		if (difftime(time(NULL), start) > 0.5) {
+			fsm.state();					//runs current state of state machine
+			start = time(NULL);
+		}
+
+		//other code that is not blocked by state machine
+
+	}
 
 	return 0;	//program ran successfully 
 } 
