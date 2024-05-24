@@ -74,16 +74,16 @@ void turn_off_led(){
 // -----------------------------------------
 
 /**
- * \brief           start point of state machine
+ * \brief           start_time point of state machine
  */
-void state_start(void) {
+void state_start_time(void) {
 	init_function();
 
 	fsm.state = state_led_on;
 }
 
 /**
- * \brief           turns on the led and checks 
+ * \brief           turns on the led and checks if runs succeed number of needed runs
  */
 void state_led_on(void) {
 	printf("\n\n run: %i", var.counter);	
@@ -99,12 +99,18 @@ void state_led_on(void) {
 	}
 }
 
+/**
+ * \brief           turns off the led
+ */
 void state_led_off(void) {
 	turn_off_led();
 
 	fsm.state = state_led_on;
 }
 
+/**
+ * \brief           turns off the led, and ends program
+ */
 void state_end_program(void) {
 	turn_off_led();
 	printf("\n Ending the program.");
@@ -118,32 +124,36 @@ void state_end_program(void) {
 
 int main() 
 { 
-	fsm.state = state_start;
+	fsm.state = state_start_time;
 
-/*
+
+	/*
 	// while function with delay
 	while(1) {
 		usleep(500 * 1000);  					// usleep takes sleep time in microseconds
 		fsm.state();							//runs current state of state machine
 	}
-*/
+	*/
 
 
-	// while function that just loops through often so it can react to something and is not blocked
-	time_t start;
-	start = time(NULL);
+	time_t start_time;
+	start_time = time(NULL);
 
-
-	while(1) {
-		if (difftime(time(NULL), start) > 0.5) {
+	// while function that doesn't block code with sleep function
+	while(1) {									
+		if (difftime(time(NULL), start_time) > 0.5) {	
 			fsm.state();					//runs current state of state machine
-			start = time(NULL);
+			start_time = time(NULL);
 		}
+		usleep(1 * 1000);  					// 1 microsecond delay so is will not block one CPU core (delay not needed in embedded)
 
-		//other code that is not blocked by state machine
+
+		//----
+		//other code that is not blocked by sleep function
+		//----
 
 	}
 
-	return 0;	//program ran successfully 
+	return 0;	//program ended successfully 
 } 
 
