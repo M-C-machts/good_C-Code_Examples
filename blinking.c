@@ -29,7 +29,6 @@ void state_led_on(void) {
 	else {
 		fsm.state = state_end_program;
 	}
-
 }
 
 void state_led_off(void) {
