@@ -6,6 +6,11 @@
 
 #include "blinking.h"
 
+/*
+typedef void (*fsm_state)(void);
+fsm_state fsm;
+*/
+
 typedef void (*fsm_state)(void);
 typedef struct {
 	fsm_state state;
@@ -29,10 +34,7 @@ led_variables var;
 
 
 
-/*
-typedef void (*fsm_state)(void);
-fsm_state fsm;
-*/
+
 
 
 
@@ -76,7 +78,7 @@ void turn_off_led(){
 /**
  * \brief           start_time point of state machine
  */
-void state_start_time(void) {
+void state_start(void) {
 	init_function();
 
 	fsm.state = state_led_on;
@@ -124,7 +126,7 @@ void state_end_program(void) {
 
 int main() 
 { 
-	fsm.state = state_start_time;
+	fsm.state = state_start;
 
 
 	/*
