@@ -4,7 +4,7 @@
 
 #include <time.h>
 
-#include "blinking.h"
+#include "blinking_(function_pointer_fsm).h"
 
 /*
 typedef void (*fsm_state)(void);
