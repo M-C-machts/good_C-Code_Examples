@@ -14,7 +14,7 @@
  */
 typedef struct {
 	uint8_t buffer_size;					/*!< how many element in the buffer*/
-	uint8_t buffer_front;					/*!< first element in the buffer*/
+	uint8_t buffer_start;					/*!< first element in the buffer*/
 	uint8_t buffer_end;					    /*!< last element in the buffer*/
 	
 } queue_variables;
@@ -31,8 +31,8 @@ queue_variables var;
  * \brief           initializes all variables and code needed
  */
 void init_function(){
-	var.buffer_size = 10;
-	var.buffer_front = 0; 
+	var.buffer_size = 10;       // 0 to 9
+	var.buffer_start = 0; 
     var.buffer_end = 0;
 }
 
@@ -41,11 +41,11 @@ void init_function(){
  * \return          uint8_t elements contained in buffer
  */
 uint8_t elements_in_buffer() {
-    if (var.buffer_front > var.buffer_end) {
-        return var.buffer_size - var.buffer_front + var.buffer_end;
+    if (var.buffer_start > var.buffer_end) {
+        return var.buffer_size - var.buffer_start + var.buffer_end;
     }
     else {
-        return var.buffer_end - var.buffer_front;
+        return var.buffer_end - var.buffer_start;
     }
 }
 
