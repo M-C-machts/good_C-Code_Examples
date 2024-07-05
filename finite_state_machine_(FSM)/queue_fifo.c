@@ -13,13 +13,13 @@
  * \brief           includes all needed variables
  */
 typedef struct {
-	uint8_t buffer_size;					/*!< how many element in the buffer*/
-	uint8_t buffer_start;					/*!< first element in the buffer*/
-	uint8_t buffer_end;					    /*!< last element in the buffer*/
+	uint8_t size;					/*!< how many element in the buffer*/
+	uint8_t write_index;					/*!< first element in the buffer*/
+	uint8_t read_index;					    /*!< last element in the buffer*/
 	
-} queue_variables;
+} buffer_variables;
 
-queue_variables var;
+buffer_variables buffer;
 
 
 
@@ -31,9 +31,9 @@ queue_variables var;
  * \brief           initializes all variables and code needed
  */
 void init_function(){
-	var.buffer_size = 10;       // 0 to 9
-	var.buffer_start = 0; 
-    var.buffer_end = 0;
+	buffer.size = 10;       // 0 to 9
+	buffer.write_index = 0; 
+    buffer.read_index = 0;
 }
 
 /**
@@ -41,18 +41,18 @@ void init_function(){
  * \return          uint8_t elements contained in buffer
  */
 uint8_t elements_in_buffer() {
-    if (var.buffer_start > var.buffer_end) {
-        return var.buffer_size - var.buffer_start + var.buffer_end;
+    if (buffer.write_index > buffer.read_index) {
+        return buffer.write_index - buffer.read_index;
     }
     else {
-        return var.buffer_end - var.buffer_start;
+        return buffer.size - buffer.write_index + buffer.read_index;
     }
 }
 
 /**
- * \brief           takes element and saves it last in queue
+ * \brief           takes element and saves it to the queue
  */
-void enqueue(uint32_t number) {
+void write_to_buffer(uint32_t number) {
     //put element in que
 
 }
@@ -61,7 +61,7 @@ void enqueue(uint32_t number) {
  * \brief           returns first element from queue
  * \return          returns first element from queue
  */
-uint32_t dequeue(){
+uint32_t get_buffer_element(){
     uint32_t last_element;
 
     //code
