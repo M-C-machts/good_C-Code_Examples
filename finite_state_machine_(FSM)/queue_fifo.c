@@ -31,7 +31,7 @@ buffer_variables buffer;
 /**
  * \brief           initializes all variables and code needed
  */
-void init_function(){
+void init_function() {
 	//buffer.buffer[10] = {0};			//set all 10 elements to 0 
 	for (int i=0; i<5; i++) {
 		buffer.buffer[i] = 0;
@@ -49,7 +49,7 @@ void init_function(){
  * \return          uint8_t elements contained in buffer
  */
 uint8_t elements_in_buffer() {
-    if (buffer.write_index > buffer.read_index) {
+    if (buffer.write_index >= buffer.read_index) {
         return buffer.write_index - buffer.read_index;
     }
     else {
@@ -112,20 +112,21 @@ uint32_t read_from_buffer() {
 // --------------------- MAIN ---------------------------
 
 int main() 
-{ 
-	for (int i=0; i<10; i++) {
-		write_to_buffer(i);
+{
+    init_function();
 
-        printf("\nread_index: %u, write_index: %u\n", buffer.read_index, buffer.write_index);
-		printf("%u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", buffer.buffer[0], buffer.buffer[1], buffer.buffer[2], buffer.buffer[3], buffer.buffer[4], buffer.buffer[5], buffer.buffer[6], buffer.buffer[7], buffer.buffer[8], buffer.buffer[9]);
-        
-		//for (int j=0; j<10; j++) {
-		//	printf("%u, ", buffer.buffer[j]);	//print buffer
-		//	printf("\n");
-		//}
-		
 
-	}
+	write_to_buffer(1);
+	write_to_buffer(2);
+	write_to_buffer(3);
+
+    printf("\nread_index: %u, write_index: %u\n", buffer.read_index, buffer.write_index);
+    printf("elements_in_buffer: %u\n", elements_in_buffer());
+	printf("buffer: %u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", buffer.buffer[0], buffer.buffer[1], buffer.buffer[2], buffer.buffer[3], buffer.buffer[4], buffer.buffer[5], buffer.buffer[6], buffer.buffer[7], buffer.buffer[8], buffer.buffer[9]);
+    
+	
+
+
 
 	return 0;	//program ended successfully 
 } 
